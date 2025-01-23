@@ -1,22 +1,30 @@
-#include <iostream>
 #include "Grafo.h"
+#include "BuscaMenorCaminho.h"
 
 int main() {
     Grafo grafo;
 
-    // Adicionando nós ao grafo
-    grafo.adicionarNo(1, "A");
-    grafo.adicionarNo(2, "B");
-    grafo.adicionarNo(3, "C");
+    // Adicionando nós com identificadores não sequenciais
+    grafo.adicionarNo(10, "A");
+    grafo.adicionarNo(5, "B");
+    grafo.adicionarNo(20, "C");
+    grafo.adicionarNo(15, "D");
+    grafo.adicionarNo(25, "E");
 
-    // Adicionando arestas entre os nós
-    grafo.adicionarAresta(1, 2, 5.0); // A -> B com peso 5.0
-    grafo.adicionarAresta(2, 3, 3.0); // B -> C com peso 3.0
-    grafo.adicionarAresta(1, 3, 8.0); // A -> C com peso 8.0
+    // Adicionando arestas (origem, destino, peso)
+    grafo.adicionarAresta(10, 5, 3.0);   // A -> B
+    grafo.adicionarAresta(5, 20, 4.0);   // B -> C
+    grafo.adicionarAresta(10, 20, 10.0); // A -> C
+    grafo.adicionarAresta(20, 15, 2.0);  // C -> D
+    grafo.adicionarAresta(15, 25, 6.0);  // D -> E
+    grafo.adicionarAresta(25, 10, 7.0);  // E -> A
 
-    // Exibir grafo
-    std::cout << "Grafo criado:" << std::endl;
+    // Imprimindo o grafo
     grafo.imprimirGrafo();
+
+    // Criando o objeto de busca e encontrando o menor caminho entre 10 (A) e 25 (E)
+    BuscaMenorCaminho busca;
+    busca.encontrarMenorCaminho(grafo, 10, 25);
 
     return 0;
 }

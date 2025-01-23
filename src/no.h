@@ -13,10 +13,8 @@ private:
 public:
     No(); // Construtor padrão
     No(int id, const std::string& nome); // Construtor com argumentos
-
     int getId() const;
     std::string getNome() const;
-
     void adicionarAdjacente(int idDestino, double peso);
     const std::vector<std::pair<int, double>>& getAdjacentes() const;
 };

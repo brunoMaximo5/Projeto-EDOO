@@ -1,31 +1,38 @@
 #include "Grafo.h"
 #include <iostream>
 
-// Adiciona um novo nó ao grafo
 void Grafo::adicionarNo(int id, const std::string& nome) {
     if (nos.find(id) == nos.end()) {
-        nos.emplace(id, No(id, nome));
+        nos[id] = No(id, nome);
+    } else {
+        std::cout << "Nó com ID " << id << " já existe." << std::endl;
     }
 }
 
-// Adiciona uma aresta entre dois nós
 void Grafo::adicionarAresta(int idOrigem, int idDestino, double peso) {
     if (nos.find(idOrigem) != nos.end() && nos.find(idDestino) != nos.end()) {
         nos[idOrigem].adicionarAdjacente(idDestino, peso);
+    } else {
+        std::cout << "Origem ou destino inválido." << std::endl;
     }
 }
 
-// Retorna um ponteiro para o nó com o ID especificado
 No* Grafo::obterNo(int id) {
-    return (nos.find(id) != nos.end()) ? &nos[id] : nullptr;
+    if (nos.find(id) != nos.end()) {
+        return &nos[id];
+    }
+    return nullptr;
 }
 
-// Imprime os nós e suas conexões para depuração
+const std::unordered_map<int, No>& Grafo::getNos() const {
+    return nos;
+}
+
 void Grafo::imprimirGrafo() {
     for (const auto& [id, no] : nos) {
-        std::cout << "No " << no.getId() << " (" << no.getNome() << ") -> ";
-        for (const auto& [idAdj, peso] : no.getAdjacentes()) {
-            std::cout << "[" << idAdj << ", " << peso << "] ";
+        std::cout << "Nó " << no.getNome() << " (ID " << id << "): ";
+        for (const auto& [destino, peso] : no.getAdjacentes()) {
+            std::cout << "-> " << destino << " (peso " << peso << ") ";
         }
         std::cout << std::endl;
     }

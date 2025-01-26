@@ -1,5 +1,7 @@
 #include "Grafo.h"
 #include "BuscaMenorCaminho.h"
+#include <iostream>
+#include <limits>
 
 int main() {
     Grafo grafo;
@@ -19,12 +21,40 @@ int main() {
     grafo.adicionarAresta(15, 25, 6.0);  // D -> E
     grafo.adicionarAresta(25, 10, 7.0);  // E -> A
 
-    // Imprimindo o grafo
+    std::cout << "Grafo atual:\n";
     grafo.imprimirGrafo();
 
-    // Criando o objeto de busca e encontrando o menor caminho entre 10 (A) e 25 (E)
     BuscaMenorCaminho busca;
-    busca.encontrarMenorCaminho(grafo, 10, 25);
 
+    while (true) {
+        int origem, destino;
+
+        // Entrada do nó de origem
+        std::cout << "\nDigite o ID do nó de origem (ou -1 para sair): ";
+        std::cin >> origem;
+        if (origem == -1) break;
+
+        // Validar nó de origem
+        if (!grafo.obterNo(origem)) {
+            std::cout << "Nó de origem inválido! Tente novamente.\n";
+            continue;
+        }
+
+        // Entrada do nó de destino
+        std::cout << "Digite o ID do nó de destino: ";
+        std::cin >> destino;
+
+        // Validar nó de destino
+        if (!grafo.obterNo(destino)) {
+            std::cout << "Nó de destino inválido! Tente novamente.\n";
+            continue;
+        }
+
+        // Calcular e exibir o menor caminho
+        std::cout << "\nCalculando o menor caminho...\n";
+        busca.encontrarMenorCaminho(grafo, origem, destino);
+    }
+
+    std::cout << "\nPrograma encerrado.\n";
     return 0;
 }

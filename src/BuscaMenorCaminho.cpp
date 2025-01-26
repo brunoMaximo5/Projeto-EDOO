@@ -1,26 +1,23 @@
 #include "BuscaMenorCaminho.h"
 #include <limits>
 #include <iostream>
-#include <unordered_map>
-#include <queue>
-#include <vector>
 
+// Implementação do algoritmo de Dijkstra para encontrar o menor caminho
 void BuscaMenorCaminho::encontrarMenorCaminho(Grafo& grafo, int origem, int destino) {
-    std::unordered_map<int, double> dist;
-    std::unordered_map<int, int> anterior;
+    std::unordered_map<int, double> dist; // Distâncias mínimas dos nós
+    std::unordered_map<int, int> anterior; // Predecessor de cada nó
 
-    // Inicializando distâncias como infinito, exceto a origem
+    // Inicializa as distâncias como infinito, exceto a origem
     for (const auto& [id, _] : grafo.getNos()) {
         dist[id] = std::numeric_limits<double>::infinity();
     }
     dist[origem] = 0;
 
-    // Fila de prioridade para explorar os nós mais próximos
+    // Configura a fila de prioridade para explorar os nós mais próximos
     auto cmp = [&dist](int left, int right) { return dist[left] > dist[right]; };
     std::priority_queue<int, std::vector<int>, decltype(cmp)> fila(cmp);
     fila.push(origem);
 
-    // Algoritmo de Dijkstra
     while (!fila.empty()) {
         int atual = fila.top();
         fila.pop();
@@ -37,22 +34,20 @@ void BuscaMenorCaminho::encontrarMenorCaminho(Grafo& grafo, int origem, int dest
         }
     }
 
-    // Construção do caminho
+    // Exibe o menor caminho encontrado
     std::vector<int> caminho;
     for (int v = destino; v != origem; v = anterior[v]) {
         caminho.push_back(v);
     }
     caminho.push_back(origem);
 
-    // Exibição do caminho encontrado
-    std::cout << "Menor caminho de " << grafo.obterNo(origem)->getNome()
-              << " para " << grafo.obterNo(destino)->getNome() << ": ";
+    std::cout << "Menor caminho: ";
     for (auto it = caminho.rbegin(); it != caminho.rend(); ++it) {
-        std::cout << grafo.obterNo(*it)->getNome();
+        std::cout << *it;
         if (it != caminho.rend() - 1) std::cout << " -> ";
     }
     std::cout << std::endl;
 
-    // Exibição do custo total
+    // Exibe o custo total
     std::cout << "Custo total: " << dist[destino] << std::endl;
 }

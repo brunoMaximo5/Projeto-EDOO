@@ -6,9 +6,10 @@
 #include <queue>
 #include <vector>
 
+// Classe que implementa o algoritmo de Dijkstra para buscar o menor caminho
 class BuscaMenorCaminho {
 public:
-    void encontrarMenorCaminho(Grafo& grafo, int origem, int destino);
+    void encontrarMenorCaminho(Grafo& grafo, int origem, int destino); // Executa a busca
 };
 
 #endif

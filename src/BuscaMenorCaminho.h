@@ -1,15 +1,15 @@
 #ifndef BUSCA_MENOR_CAMINHO_H
 #define BUSCA_MENOR_CAMINHO_H
 
-#include "Grafo.h"
+#include "busca.h"
 #include <unordered_map>
 #include <queue>
 #include <vector>
+#include <iostream>
 
-// Classe que implementa o algoritmo de Dijkstra para buscar o menor caminho
-class BuscaMenorCaminho {
+class BuscaMenorCaminho : public Busca {
 public:
-    void encontrarMenorCaminho(Grafo& grafo, int origem, int destino); // Executa a busca
+    void encontrarCaminho(Grafo& grafo, int origem, int destino) override;
 };
 
 #endif

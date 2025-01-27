@@ -24,6 +24,7 @@ int main() {
     std::cout << "Grafo atual:\n";
     grafo.imprimirGrafo();
 
+    // Instanciando a classe derivada de Busca
     BuscaMenorCaminho busca;
 
     while (true) {
@@ -52,7 +53,7 @@ int main() {
 
         // Calcular e exibir o menor caminho
         std::cout << "\nCalculando o menor caminho...\n";
-        busca.encontrarMenorCaminho(grafo, origem, destino);
+        busca.encontrarCaminho(grafo, origem, destino); // Corrigido o nome do método
     }
 
     std::cout << "\nPrograma encerrado.\n";

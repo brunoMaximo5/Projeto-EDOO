@@ -1,19 +1,18 @@
-#include "BuscaMenorCaminho.h"
+#include "buscaMenorCaminho.h"
 #include <limits>
-#include <iostream>
 
-// Implementação do algoritmo de Dijkstra para encontrar o menor caminho
-void BuscaMenorCaminho::encontrarMenorCaminho(Grafo& grafo, int origem, int destino) {
-    std::unordered_map<int, double> dist; // Distâncias mínimas dos nós
-    std::unordered_map<int, int> anterior; // Predecessor de cada nó
+void BuscaMenorCaminho::encontrarCaminho(Grafo& grafo, int origem, int destino) {
+    exibirIntroducao(); // Chamando método da classe base
 
-    // Inicializa as distâncias como infinito, exceto a origem
+    std::unordered_map<int, double> dist;
+    std::unordered_map<int, int> anterior;
+
+    // Inicializa as distâncias
     for (const auto& [id, _] : grafo.getNos()) {
         dist[id] = std::numeric_limits<double>::infinity();
     }
     dist[origem] = 0;
 
-    // Configura a fila de prioridade para explorar os nós mais próximos
     auto cmp = [&dist](int left, int right) { return dist[left] > dist[right]; };
     std::priority_queue<int, std::vector<int>, decltype(cmp)> fila(cmp);
     fila.push(origem);
@@ -34,7 +33,6 @@ void BuscaMenorCaminho::encontrarMenorCaminho(Grafo& grafo, int origem, int dest
         }
     }
 
-    // Exibe o menor caminho encontrado
     std::vector<int> caminho;
     for (int v = destino; v != origem; v = anterior[v]) {
         caminho.push_back(v);
@@ -48,6 +46,5 @@ void BuscaMenorCaminho::encontrarMenorCaminho(Grafo& grafo, int origem, int dest
     }
     std::cout << std::endl;
 
-    // Exibe o custo total
     std::cout << "Custo total: " << dist[destino] << std::endl;
 }

@@ -8,7 +8,7 @@ void Grafo::adicionarNo(int id, const std::string& nome) {
     if (nos.find(id) == nos.end()) {
         nos[id] = No(id, nome);
     } else {
-        std::cout << "Nó com ID " << id << " já existe." << std::endl;
+        std::cout << "No com ID " << id << " já existe." << std::endl;
     }
 }
 
@@ -37,7 +37,7 @@ const std::unordered_map<int, No>& Grafo::getNos() const {
 // Imprime todos os nós e suas conexões no console
 void Grafo::imprimirGrafo() {
     std::cout << "\n===== Estrutura do Grafo =====\n";
-    std::cout << "No      | Conexões (Destino, Peso)\n";
+    std::cout << "No      | Conexoes (Destino, Peso)\n";
     std::cout << "----------------------------------\n";
 
     for (const auto& [id, no] : nos) {

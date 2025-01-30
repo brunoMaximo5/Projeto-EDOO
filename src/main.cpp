@@ -19,23 +19,23 @@ int main() {
         int origem, destino;
 
         // Entrada do nó de origem
-        std::cout << "\nDigite o ID do nó de origem (ou -1 para sair): ";
+        std::cout << "\nDigite o ID do no de origem (ou -1 para sair): ";
         std::cin >> origem;
         if (origem == -1) break;
 
         // Validar nó de origem
         if (!grafo.obterNo(origem)) {
-            std::cout << "Nó de origem inválido! Tente novamente.\n";
+            std::cout << "No de origem inválido! Tente novamente.\n";
             continue;
         }
 
         // Entrada do nó de destino
-        std::cout << "Digite o ID do nó de destino: ";
+        std::cout << "Digite o ID do no de destino: ";
         std::cin >> destino;
 
         // Validar nó de destino
         if (!grafo.obterNo(destino)) {
-            std::cout << "Nó de destino inválido! Tente novamente.\n";
+            std::cout << "No de destino inválido! Tente novamente.\n";
             continue;
         }
 

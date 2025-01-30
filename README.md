@@ -19,8 +19,6 @@ O projeto é composto pelos seguintes arquivos:
 
 ## Como Executar o Projeto
 
-Para executar o projeto, siga as etapas abaixo:
-
 ### 1. Pré-requisitos
 
 Certifique-se de que você tenha o compilador **g++** instalado em seu sistema e que o C++17 esteja habilitado para que o código funcione corretamente.
@@ -30,26 +28,38 @@ Se você estiver utilizando um ambiente baseado em Linux ou Windows com o MSYS2 
 ```bash
 sudo apt-get install g++
 
-. Compilando o Projeto
+``` 
+
+2. Compilando o Projeto
+
 Abra o terminal ou prompt de comando no diretório onde os arquivos do projeto estão localizados e execute o seguinte comando para compilar o código:
 
-bash
+```bash
 g++ -o Dijkstra Main.cpp Grafo.cpp No.cpp Busca.cpp BuscaMenorCaminho.cpp -std=c++17
+
+``` 
 Esse comando compilará todos os arquivos e gerará um executável chamado Dijkstra.
 
-3. Executando o Programa
+### 3. Executando o Programa
+
 Para executar o programa, basta rodar o seguinte comando:
 
-bash
-Copiar
-Editar
-./Dijkstra
-Ou, se você estiver no Windows, use:
+#### No Linux/Mac:
 
-bash
-Copiar
-Editar
+```bash
+./Dijkstra
+```
+No Windows (usando Git Bash ou terminal similar):
+
+```bash
+./Dijkstra
+```
+No Windows (usando o Prompt de Comando ou PowerShell):
+
+```bash
 Dijkstra.exe
+``` 
+
 4. Carregar um Grafo
 O programa carrega um grafo a partir de um arquivo. Você pode modificar o código para usar um arquivo de grafo específico ou ajustar o carregamento de dados no próprio código.
 

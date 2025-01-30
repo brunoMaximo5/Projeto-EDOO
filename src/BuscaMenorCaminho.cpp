@@ -2,47 +2,49 @@
 #include <limits>
 
 void BuscaMenorCaminho::encontrarCaminho(Grafo& grafo, int origem, int destino) {
-    exibirIntroducao(); // Chamando método da classe base
+    exibirIntroducao(); // Chamando método da classe base para exibir a introdução
 
-    std::unordered_map<int, double> dist; // Armazena a menor distância de origem até cada nó
-    std::unordered_map<int, int> anterior; // Armazena o caminho percorrido
+    // Mapas para armazenar as distâncias mínimas e os predecessores no caminho
+    std::unordered_map<int, double> dist;
+    std::unordered_map<int, int> anterior;
 
-    // Inicializa as distâncias com infinito
+    // Inicializa as distâncias com infinito, exceto para a origem
     for (const auto& [id, _] : grafo.getNos()) {
         dist[id] = std::numeric_limits<double>::infinity();
     }
-    dist[origem] = 0; // Distância da origem para ela mesma é 0
+    dist[origem] = 0; // A distância da origem para ela mesma é 0
 
-    // Criando a fila de prioridade para processar os nós com menor distância primeiro
+    // Fila de prioridade que processa os nós pela menor distância
     auto cmp = [&dist](int left, int right) { return dist[left] > dist[right]; };
     std::priority_queue<int, std::vector<int>, decltype(cmp)> fila(cmp);
     fila.push(origem);
 
+    // Algoritmo de Dijkstra
     while (!fila.empty()) {
-        int atual = fila.top(); // Obtém o nó com menor distância
+        int atual = fila.top(); // Obtém o nó com a menor distância
         fila.pop();
 
-        if (atual == destino) break; // Se o destino foi alcançado, interrompe a busca
+        if (atual == destino) break; // Se o destino foi encontrado, encerra a busca
 
         // Percorre os vizinhos do nó atual
         for (const auto& [vizinho, peso] : grafo.obterNo(atual)->getAdjacentes()) {
             double novaDist = dist[atual] + peso; // Calcula a nova distância
             if (novaDist < dist[vizinho]) { // Se encontrou um caminho melhor, atualiza
                 dist[vizinho] = novaDist;
-                anterior[vizinho] = atual; // Registra o caminho percorrido
+                anterior[vizinho] = atual; // Registra o nó anterior no caminho
                 fila.push(vizinho); // Adiciona o vizinho à fila para processamento
             }
         }
     }
 
-    // Reconstruindo o caminho a partir do destino até a origem
+    // Reconstrução do caminho a partir do destino até a origem
     std::vector<int> caminho;
     for (int v = destino; v != origem; v = anterior[v]) {
         caminho.push_back(v);
     }
     caminho.push_back(origem);
 
-    // Exibindo o menor caminho encontrado
+    // Exibindo o caminho e o custo total
     std::cout << "Menor caminho: ";
     for (auto it = caminho.rbegin(); it != caminho.rend(); ++it) {
         std::cout << *it;
@@ -50,6 +52,5 @@ void BuscaMenorCaminho::encontrarCaminho(Grafo& grafo, int origem, int destino) 
     }
     std::cout << std::endl;
 
-    // Exibindo o custo total do caminho
     std::cout << "Custo total: " << dist[destino] << std::endl;
 }

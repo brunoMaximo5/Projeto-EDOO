@@ -7,10 +7,10 @@
 #include <vector>        // Para armazenar o caminho encontrado
 #include <iostream>      // Para saída de dados
 
-// Classe BuscaMenorCaminho, que herda de Busca e implementa a busca do menor caminho
+// Classe que implementa a busca do menor caminho usando o algoritmo de Dijkstra
 class BuscaMenorCaminho : public Busca {
 public:
-    // Método que encontra o menor caminho entre dois nós no grafo
+    // Implementação do método que encontra o menor caminho entre dois nós no grafo
     void encontrarCaminho(Grafo& grafo, int origem, int destino) override;
 };
 

@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <string>
 
-// Classe que representa o grafo como um todo
 class Grafo {
 private:
     std::unordered_map<int, No> nos; // Mapeamento de ID para nós
@@ -16,6 +15,7 @@ public:
     No* obterNo(int id); // Obtém um ponteiro para um nó específico pelo ID
     const std::unordered_map<int, No>& getNos() const; // Retorna todos os nós no grafo
     void imprimirGrafo(); // Exibe o grafo no console
+    void carregarDeArquivo(const std::string& caminhoArquivo); // Carrega o grafo de um arquivo
 };
 
 #endif

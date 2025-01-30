@@ -1,5 +1,7 @@
 #include "Grafo.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 // Adiciona um nó ao grafo, caso o ID não esteja em uso
 void Grafo::adicionarNo(int id, const std::string& nome) {
@@ -34,11 +36,74 @@ const std::unordered_map<int, No>& Grafo::getNos() const {
 
 // Imprime todos os nós e suas conexões no console
 void Grafo::imprimirGrafo() {
+    std::cout << "\n===== Estrutura do Grafo =====\n";
+    std::cout << "No      | Conexões (Destino, Peso)\n";
+    std::cout << "----------------------------------\n";
+
     for (const auto& [id, no] : nos) {
-        std::cout << "Nó " << no.getNome() << " (ID " << id << "): ";
-        for (const auto& [destino, peso] : no.getAdjacentes()) {
-            std::cout << "-> " << destino << " (peso " << peso << ") ";
+        std::cout << no.getNome() << " (" << id << ")  | ";
+        
+        const auto& adjacentes = no.getAdjacentes();
+        if (adjacentes.empty()) {
+            std::cout << "Sem conexoes";
+        } else {
+            for (size_t i = 0; i < adjacentes.size(); i++) {
+                int destino = adjacentes[i].first;
+                double peso = adjacentes[i].second;
+                std::cout << destino << " (" << peso << ")";
+                if (i < adjacentes.size() - 1) std::cout << ", ";
+            }
         }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
+    std::cout << "==================================\n";
+}
+
+// Função para carregar o grafo de um arquivo
+void Grafo::carregarDeArquivo(const std::string& caminhoArquivo) {
+    std::ifstream arquivo(caminhoArquivo);
+    if (!arquivo.is_open()) {
+        std::cerr << "Erro ao abrir o arquivo: " << caminhoArquivo << std::endl;
+        return;
+    }
+
+    std::string linha;
+    bool lendoNos = false;
+    bool lendoArestas = false;
+
+    while (std::getline(arquivo, linha)) {
+        // Ignorar linhas em branco
+        if (linha.empty()) continue;
+
+        // Verificar se estamos na seção de nós ou arestas
+        if (linha == "nos") {
+            lendoNos = true;
+            lendoArestas = false;
+            continue;
+        } else if (linha == "arestas") {
+            lendoNos = false;
+            lendoArestas = true;
+            continue;
+        }
+
+        // Ler nós
+        if (lendoNos) {
+            std::istringstream ss(linha);
+            int id;
+            std::string nome;
+            ss >> id >> nome;
+            adicionarNo(id, nome);
+        }
+
+        // Ler arestas
+        if (lendoArestas) {
+            std::istringstream ss(linha);
+            int origem, destino;
+            double peso;
+            ss >> origem >> destino >> peso;
+            adicionarAresta(origem, destino, peso);
+        }
+    }
+
+    arquivo.close();
 }

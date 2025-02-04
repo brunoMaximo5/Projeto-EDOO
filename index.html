@@ -11,15 +11,20 @@
             color: #333;
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
         header {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 20px;
             text-align: center;
         }
         header h1 {
             margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.1rem;
         }
         section {
             padding: 20px;
@@ -27,6 +32,11 @@
         }
         h2 {
             color: #4CAF50;
+            font-size: 1.8rem;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
         }
         a {
             color: #007BFF;
@@ -57,6 +67,23 @@
         .links {
             margin-top: 20px;
         }
+
+        /* Estilo para responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -64,25 +91,21 @@
         <h1>Bem-vindo ao Projeto EDOO - Dijkstra</h1>
         <p>Implementação do algoritmo de Dijkstra para encontrar o menor caminho em grafos, utilizando C++ e programação orientada a objetos (OOP).</p>
     </header>
-
     <section>
-        <h2>Características do projeto:</h2>
+        <h2>Objetivo do Projeto</h2>
         <div class="content-box">
-            <ul>
-                <li>Implementação do algoritmo de Dijkstra em C++.</li>
-                <li>Uso de programação orientada a objetos (OOP).</li>
-                <li>Representação do grafo com listas de adjacência.</li>
-                <li>Estrutura de classes para nós e grafos, com manipulação de arestas.</li>
-                <li>Busca do menor caminho entre dois nós com exibição do custo total.</li>
-            </ul>
+            <p>Este projeto tem como objetivo implementar o algoritmo de Dijkstra em C++, utilizando os conceitos de Programação Orientada a Objetos (POO).<br><br>
+            O foco é criar um código bem estruturado, modular e reutilizável.<br><br>
+            O algoritmo de Dijkstra é amplamente usado para encontrar o caminho mais curto entre um nó de origem e todos os outros nós em um grafo ponderado, onde os pesos das arestas são não negativos.<br><br>
+            Este tipo de problema é crucial em várias áreas da computação e engenharia, e o projeto busca fornecer uma solução otimizada e prática para esse desafio.</p>
         </div>
     </section>
-
+    
     <section>
         <h2>Visualizações</h2>
         <div class="content-box">
-            <img src="diagrama.jpg" alt="Diagrama do Algoritmo de Dijkstra">
-            <p>Acima, temos um diagrama do algoritmo de Dijkstra implementado no projeto.</p>
+            <img src="imagens/codigofuncionamento.jpg" alt="Codigo em Funcionamento">
+            <p>Aqui mostrando como o código fica em Funcionamento.</p>
         </div>
     </section>
 
